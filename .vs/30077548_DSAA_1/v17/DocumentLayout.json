@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\sebas\\OneDrive - University of South Wales\\Uni\\Data structures and algorithms\\30077548_Data_Structures_And_Algorithms_Assignment_1\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C20639E0-8622-4C4B-ACE2-D38A77C29434}|30077548_DSAA_1\\30077548_DSAA_1.vcxproj|C:\\Users\\sebas\\OneDrive - University of South Wales\\Uni\\Data structures and algorithms\\30077548_Data_Structures_And_Algorithms_Assignment_1\\30077548_DSAA_1\\30077548.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C20639E0-8622-4C4B-ACE2-D38A77C29434}|30077548_DSAA_1\\30077548_DSAA_1.vcxproj|solutionrelative:30077548_DSAA_1\\30077548.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "30077548.cpp",
+              "DocumentMoniker": "C:\\Users\\sebas\\OneDrive - University of South Wales\\Uni\\Data structures and algorithms\\30077548_Data_Structures_And_Algorithms_Assignment_1\\30077548_DSAA_1\\30077548.cpp",
+              "RelativeDocumentMoniker": "30077548_DSAA_1\\30077548.cpp",
+              "ToolTip": "C:\\Users\\sebas\\OneDrive - University of South Wales\\Uni\\Data structures and algorithms\\30077548_Data_Structures_And_Algorithms_Assignment_1\\30077548_DSAA_1\\30077548.cpp",
+              "RelativeToolTip": "30077548_DSAA_1\\30077548.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIBAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-19T14:54:24.131Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

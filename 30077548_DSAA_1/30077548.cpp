@@ -1,0 +1,354 @@
+//name the file using your student ID
+//e.g 012345678.cpp
+
+
+// do not change the declaration section !
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+	Node(int value, Node* nextptr = nullptr, Node* prevptr = nullptr,
+		int currentpriority = 0);
+
+	int getVal(void);
+
+	Node* getNext(void);
+
+	Node* getPrev(void);
+
+	void setVal(int value);
+
+	void setPrev(Node* prevptr);
+
+	void setNext(Node* nextptr);
+
+	int getPriority(void);
+
+	void setPriority(int priority);
+
+
+private:
+	Node* next;
+	Node* prev;
+	int priority;
+	int value;
+};
+
+class Stack
+{
+public:
+	Stack(void);
+
+	~Stack(void);
+
+	void Push(int value);
+
+	Node* NodePop(void);
+
+	int Pop(void);
+
+private:
+
+	Node* top;
+};
+
+class Queue
+{
+public:
+	Queue(void);
+
+	~Queue(void);
+
+	void Enqueue(int i, int priority = 0);
+
+	int Dequeue(void);
+
+protected:
+
+	Node* back;
+	Node* front;
+
+private:
+
+	virtual Node* NodeDequeue(void);
+};
+
+
+class Scheduler : public Queue
+{
+	//you can only overide PUBLIC methods from the Queue class
+private:
+	//you can add private methods and attributes
+	Node* NodeDequeue(void);
+};
+
+
+//-------------------------------YOUR implementation goes here!!!-----------------------
+
+Node::Node(int value, Node* nextptr, Node* prevptr, int currentpriority) {
+	cout << "not implemented yet" << endl;
+}
+
+
+int Node::getVal(void) {
+	cout << "not implemented yet" << endl;
+	return 0; //needs changing
+}
+
+Node* Node::getNext(void) {
+	cout << "not implemented yet" << endl;
+	return nullptr; //needs changing
+}
+
+
+Node* Node::getPrev(void) {
+	cout << "not implemented yet" << endl;
+	return nullptr; //needs changing
+}
+
+void Node::setVal(int value) {
+	cout << "not implemented yet" << endl;
+}
+
+
+void Node::setPrev(Node* prevptr) {
+	cout << "not implemented yet" << endl;
+}
+
+void Node::setNext(Node* nextptr) {
+	cout << "not implemented yet" << endl;
+}
+
+
+int Node::getPriority(void) {
+	cout << "not implemented yet" << endl;
+	return 0; //needs changing
+};
+
+void Node::setPriority(int priority) {
+	cout << "not implemented yet" << endl;
+};
+
+Stack::Stack(void) {
+	cout << "not implemented yet" << endl;
+}
+
+Stack::~Stack(void) {
+	cout << "not implemented yet" << endl;
+}
+
+void Stack::Push(int value) {
+	cout << "not implemented yet" << endl;
+}
+
+Node* Stack::NodePop(void) {
+	cout << "not implemented yet" << endl;
+	return nullptr; //needs changing
+}
+
+int Stack::Pop(void) {
+	cout << "not implemented yet" << endl;
+	return 0; //needs changing
+}
+
+
+Queue::Queue(void) {
+	cout << "not implemented yet" << endl;
+}
+
+
+Queue::~Queue(void) {
+	cout << "not implemented yet" << endl;
+}
+
+void Queue::Enqueue(int i, int priority) {
+	cout << "not implemented yet" << endl;
+}
+
+int Queue::Dequeue(void) {
+	cout << "not implemented yet" << endl;
+	return 0; //needs changing
+}
+
+Node* Queue::NodeDequeue(void) {
+	return nullptr; //needs changing
+}
+
+
+
+// ************************** Scheduler ***************************************
+// 
+// depending on your implementation you may overide any PUBLIC methods INHERITED from the Queue class
+// as well as add ANY private methods in Scheduler class
+
+Node* Scheduler::NodeDequeue(void) {
+	cout << "depending on your implemenation you may need to modify this method" << endl;
+	return nullptr; //needs changing
+}
+
+
+//-------------------------------YOUR implementation ends here!!!!-----------------------
+
+
+
+//----------------------------- YOUR code testing --------------------------
+// comment out or delete this section AFTER you finished your testing
+
+#include <time.h>       /* time */
+#include <chrono>
+
+using namespace std::chrono;
+
+
+int main(void) {
+	int const COUNT = 20;
+	int input[COUNT] = { 1,2,3,4,5,9,8,7,6,10, 1,2,3,4,5,9,8,7,6,10 };
+
+	cout << "01. STACK BASIC TEST\n";
+
+	Stack myStack;
+	cout << "Push: \n";
+	for (int i = 0; i < COUNT; i++) {
+		cout << input[i] << " ";
+		myStack.Push(input[i]);
+	}
+	cout << "\nPop:  \n";
+	for (int i = 0; i < COUNT; i++) {
+		cout << myStack.Pop();
+		cout << " ";
+	}
+	cout << "\n\n02. EMPTY STACK EXCEPTION TEST\n";
+	myStack.Push(1);
+	try {
+		myStack.Pop();
+		myStack.Pop();
+	}
+	catch (const char* msg) {
+		cout << msg << endl;
+	}
+
+	cout << "\n\n03. QUEUE BASIC TEST\n";
+	Queue myQueue;
+	cout << "Enqueue: \n";
+	for (int i = 0; i < COUNT; i++) {
+		cout << input[i] << " ";
+		myQueue.Enqueue(input[i]);
+
+	}
+	cout << "\nDequeue: \n";
+	for (int i = 0; i < COUNT; i++) {
+		cout << myQueue.Dequeue();
+		cout << " ";
+	}
+
+	cout << "\n\n04. EMPTY QUEUE EXCEPTION TEST\n";
+	myQueue.Enqueue(1);
+	try {
+		myQueue.Dequeue();
+		myQueue.Dequeue();
+	}
+	catch (const char* msg) {
+		cout << msg << endl;
+	}
+
+	cout << "\n\n05. SCHEDULER BASIC TEST\n";
+	Scheduler myScheduler;
+	cout << "Enqueue: \n";
+	for (int i = 0; i < COUNT; i++) {
+		cout << input[i] << " ";
+		myScheduler.Enqueue(input[i], input[i]);
+
+	}
+	cout << "\nDequeue: \n";
+	for (int i = 0; i < COUNT; i++) {
+		cout << myScheduler.Dequeue();
+		cout << " ";
+	}
+
+	cout << "\n\n06. EMPTY SCHEDULER EXCEPTION TEST\n";
+	myScheduler.Enqueue(1, 1);
+	try {
+		myScheduler.Dequeue();
+		myScheduler.Dequeue();
+	}
+	catch (const char* msg) {
+		cout << msg << endl;
+	}
+
+	cout << "\n\n07. SCHEDULER PRIORITY RANGE TEST\n";
+	cout << "Enqueue(1,11): ";
+	try {
+		myScheduler.Enqueue(1, 11);
+		cout << myScheduler.Dequeue();
+	}
+	catch (const char* msg) {
+		cout << msg << endl;
+	}
+
+	cout << "\n\n08. SCHEDULER BLOCKING TEST\n";
+	cout << "Enqueue: \n";
+	for (int i = 0; i < COUNT; i++) {
+		myScheduler.Enqueue(input[i], input[i]);
+		cout << input[i] << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < 100; i++) {
+		cout << "\rEnqueue: 10 ";
+		myScheduler.Enqueue(10, 10);
+		cout << "  Dequeue: ";
+		cout << myScheduler.Dequeue();
+		cout << " ";
+	}
+	cout << "\nBlocked items: \n";
+	for (int i = 0; i < COUNT; i++) {
+		cout << myScheduler.Dequeue() << " ";
+	}
+
+
+	cout << "\n\n09. SCHEDULER PERFOMANCE TEST\n";
+	int qSize = 1000000;
+	int duration1 = 0;
+	int duration2 = 0;
+	int x = 0;
+
+	Scheduler myScheduler1;
+	for (int i = 0; i < qSize; i++) {
+		for (int i = 0; i < COUNT; i++) {
+			myScheduler1.Enqueue(input[i], input[i]);
+			//cout << input[i] << " ";
+		}
+	}
+
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
+	myScheduler1.Enqueue(10, 10);
+	x = myScheduler1.Dequeue();
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	duration1 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+	cout << "\nDequeue = " << x << " Time used : " << duration1 << " microseconds." << endl << endl;
+
+	Scheduler myScheduler2;
+	qSize = 2 * qSize;
+	for (int i = 0; i < qSize; i++) {
+		for (int i = 0; i < COUNT; i++) {
+			myScheduler2.Enqueue(input[i], input[i]);
+			//cout << input[i] << " ";
+		}
+	}
+
+
+	t1 = high_resolution_clock::now();
+	myScheduler2.Enqueue(10, 10);
+	x = myScheduler2.Dequeue();
+	t2 = high_resolution_clock::now();
+	duration2 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+	cout << "\nDequeue = " << x << " Time used : " << duration2 << " microseconds." << endl << endl;
+
+	double ratio = (double)duration2 / duration1;
+	std::cout << "ratio: " << ratio;
+
+
+	getchar();
+}
+
