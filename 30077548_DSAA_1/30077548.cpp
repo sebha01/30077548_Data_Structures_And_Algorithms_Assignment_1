@@ -141,17 +141,21 @@ void Node::setPriority(int priority)
 
 Stack::Stack(void) 
 {
-	cout << "not implemented yet" << endl;
+	top = nullptr;
 }
 
 Stack::~Stack(void) 
 {
-	cout << "not implemented yet" << endl;
+	while (top != nullptr)
+	{
+		Pop();
+	}
 }
 
 void Stack::Push(int value) 
 {
-	cout << "not implemented yet" << endl;
+	Node* tmp = new Node(value, top);
+	top = tmp;
 }
 
 Node* Stack::NodePop(void) 
@@ -162,8 +166,16 @@ Node* Stack::NodePop(void)
 
 int Stack::Pop(void) 
 {
-	cout << "not implemented yet" << endl;
-	return 0; //needs changing
+	int ret = 0;
+	if (top != nullptr)
+	{
+		ret = top->getVal();
+		Node* tmp = top;
+		top = top->getNext();
+		delete tmp;
+	}
+	else throw "Stack Empty";
+	return ret;
 }
 
 
