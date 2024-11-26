@@ -181,18 +181,31 @@ int Stack::Pop(void)
 
 Queue::Queue(void) 
 {
-	cout << "not implemented yet" << endl;
+	front = back = nullptr;
 }
 
 
 Queue::~Queue(void) 
 {
-	cout << "not implemented yet" << endl;
+	while (front != nullptr)
+	{
+		delete NodeDequeue();
+	}
 }
 
 void Queue::Enqueue(int i, int priority) 
 {
-	cout << "not implemented yet" << endl;
+	Node* tmp = new Node(i, back);
+	back = tmp;
+	if (front == nullptr)
+	{
+		front = back;
+	}
+	else
+	{
+		tmp = back->getNext();
+		tmp->setPrev(back);
+	}
 }
 
 int Queue::Dequeue(void) 
