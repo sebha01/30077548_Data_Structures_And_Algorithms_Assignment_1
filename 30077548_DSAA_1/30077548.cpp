@@ -210,13 +210,36 @@ void Queue::Enqueue(int i, int priority)
 
 int Queue::Dequeue(void) 
 {
-	cout << "not implemented yet" << endl;
-	return 0; //needs changing
+	Node* tmp = NodeDequeue();
+	int ret = 0;
+	if (tmp != nullptr)
+	{
+		ret = tmp->getVal();
+	}
+	else
+	{
+		throw "Queue Empty";
+	}
+	if (front == nullptr)
+	{
+		back = front;
+	}
+	delete tmp;
+	return ret;
 }
 
 Node* Queue::NodeDequeue(void) 
 {
-	return nullptr; //needs changing
+	Node* tmp = front;
+	if (front != nullptr)
+	{
+		front = front->getPrev();
+		if (front != nullptr)
+		{
+			front->setNext(nullptr);
+		}
+	}
+	return tmp;
 }
 
 
