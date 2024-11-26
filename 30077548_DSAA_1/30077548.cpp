@@ -89,55 +89,54 @@ private:
 
 Node::Node(int value, Node* nextptr, Node* prevptr, int currentpriority) 
 {
-	cout << "not implemented yet" << endl;
+	this->value = value;
+	this->next = nextptr;
+	this->prev = prevptr;
+	this->priority = currentpriority;
 }
 
 
 int Node::getVal(void) 
 {
-	cout << "not implemented yet" << endl;
-	return 0; //needs changing
+	return value;
 }
 
-Node* Node::getNext(void) 
+Node* Node::getNext(void)
 {
-	cout << "not implemented yet" << endl;
-	return nullptr; //needs changing
+	return next;
 }
 
 
 Node* Node::getPrev(void) 
 {
-	cout << "not implemented yet" << endl;
-	return nullptr; //needs changing
+	return prev;
 }
 
 void Node::setVal(int value) 
 {
-	cout << "not implemented yet" << endl;
+	this->value = value;
 }
 
 
 void Node::setPrev(Node* prevptr) 
 {
-	cout << "not implemented yet" << endl;
+	this->prev = prevptr;
 }
 
 void Node::setNext(Node* nextptr) 
 {
-	cout << "not implemented yet" << endl;
+	this->next = nextptr;
 }
 
 
 int Node::getPriority(void) 
 {
-	cout << "not implemented yet" << endl;
-	return 0; //needs changing
+	return priority;
 };
 
 void Node::setPriority(int priority) 
 {
-	cout << "not implemented yet" << endl;
+	this->priority = priority;
 };
 
 Stack::Stack(void) 
