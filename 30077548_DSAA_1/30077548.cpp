@@ -87,92 +87,111 @@ private:
 
 //-------------------------------YOUR implementation goes here!!!-----------------------
 
-Node::Node(int value, Node* nextptr, Node* prevptr, int currentpriority) {
+Node::Node(int value, Node* nextptr, Node* prevptr, int currentpriority) 
+{
 	cout << "not implemented yet" << endl;
 }
 
 
-int Node::getVal(void) {
+int Node::getVal(void) 
+{
 	cout << "not implemented yet" << endl;
 	return 0; //needs changing
 }
 
-Node* Node::getNext(void) {
+Node* Node::getNext(void) 
+{
 	cout << "not implemented yet" << endl;
 	return nullptr; //needs changing
 }
 
 
-Node* Node::getPrev(void) {
+Node* Node::getPrev(void) 
+{
 	cout << "not implemented yet" << endl;
 	return nullptr; //needs changing
 }
 
-void Node::setVal(int value) {
+void Node::setVal(int value) 
+{
 	cout << "not implemented yet" << endl;
 }
 
 
-void Node::setPrev(Node* prevptr) {
+void Node::setPrev(Node* prevptr) 
+{
 	cout << "not implemented yet" << endl;
 }
 
-void Node::setNext(Node* nextptr) {
+void Node::setNext(Node* nextptr) 
+{
 	cout << "not implemented yet" << endl;
 }
 
 
-int Node::getPriority(void) {
+int Node::getPriority(void) 
+{
 	cout << "not implemented yet" << endl;
 	return 0; //needs changing
 };
 
-void Node::setPriority(int priority) {
+void Node::setPriority(int priority) 
+{
 	cout << "not implemented yet" << endl;
 };
 
-Stack::Stack(void) {
+Stack::Stack(void) 
+{
 	cout << "not implemented yet" << endl;
 }
 
-Stack::~Stack(void) {
+Stack::~Stack(void) 
+{
 	cout << "not implemented yet" << endl;
 }
 
-void Stack::Push(int value) {
+void Stack::Push(int value) 
+{
 	cout << "not implemented yet" << endl;
 }
 
-Node* Stack::NodePop(void) {
+Node* Stack::NodePop(void) 
+{
 	cout << "not implemented yet" << endl;
 	return nullptr; //needs changing
 }
 
-int Stack::Pop(void) {
+int Stack::Pop(void) 
+{
 	cout << "not implemented yet" << endl;
 	return 0; //needs changing
 }
 
 
-Queue::Queue(void) {
+Queue::Queue(void) 
+{
 	cout << "not implemented yet" << endl;
 }
 
 
-Queue::~Queue(void) {
+Queue::~Queue(void) 
+{
 	cout << "not implemented yet" << endl;
 }
 
-void Queue::Enqueue(int i, int priority) {
+void Queue::Enqueue(int i, int priority) 
+{
 	cout << "not implemented yet" << endl;
 }
 
-int Queue::Dequeue(void) {
+int Queue::Dequeue(void) 
+{
 	cout << "not implemented yet" << endl;
 	return 0; //needs changing
 }
 
-Node* Queue::NodeDequeue(void) {
+Node* Queue::NodeDequeue(void) 
+{
 	return nullptr; //needs changing
 }
 
@@ -183,7 +202,8 @@ Node* Queue::NodeDequeue(void) {
 // depending on your implementation you may overide any PUBLIC methods INHERITED from the Queue class
 // as well as add ANY private methods in Scheduler class
 
-Node* Scheduler::NodeDequeue(void) {
+Node* Scheduler::NodeDequeue(void) 
+{
 	cout << "depending on your implemenation you may need to modify this method" << endl;
 	return nullptr; //needs changing
 }
@@ -202,7 +222,8 @@ Node* Scheduler::NodeDequeue(void) {
 using namespace std::chrono;
 
 
-int main(void) {
+int main(void) 
+{
 	int const COUNT = 20;
 	int input[COUNT] = { 1,2,3,4,5,9,8,7,6,10, 1,2,3,4,5,9,8,7,6,10 };
 
@@ -210,91 +231,107 @@ int main(void) {
 
 	Stack myStack;
 	cout << "Push: \n";
-	for (int i = 0; i < COUNT; i++) {
+	for (int i = 0; i < COUNT; i++) 
+	{
 		cout << input[i] << " ";
 		myStack.Push(input[i]);
 	}
 	cout << "\nPop:  \n";
-	for (int i = 0; i < COUNT; i++) {
+	for (int i = 0; i < COUNT; i++) 
+	{
 		cout << myStack.Pop();
 		cout << " ";
 	}
 	cout << "\n\n02. EMPTY STACK EXCEPTION TEST\n";
 	myStack.Push(1);
-	try {
+	try 
+	{
 		myStack.Pop();
 		myStack.Pop();
 	}
-	catch (const char* msg) {
+	catch (const char* msg) 
+	{
 		cout << msg << endl;
 	}
 
 	cout << "\n\n03. QUEUE BASIC TEST\n";
 	Queue myQueue;
 	cout << "Enqueue: \n";
-	for (int i = 0; i < COUNT; i++) {
+	for (int i = 0; i < COUNT; i++) 
+	{
 		cout << input[i] << " ";
 		myQueue.Enqueue(input[i]);
 
 	}
 	cout << "\nDequeue: \n";
-	for (int i = 0; i < COUNT; i++) {
+	for (int i = 0; i < COUNT; i++) 
+	{
 		cout << myQueue.Dequeue();
 		cout << " ";
 	}
 
 	cout << "\n\n04. EMPTY QUEUE EXCEPTION TEST\n";
 	myQueue.Enqueue(1);
-	try {
+	try 
+	{
 		myQueue.Dequeue();
 		myQueue.Dequeue();
 	}
-	catch (const char* msg) {
+	catch (const char* msg) 
+	{
 		cout << msg << endl;
 	}
 
 	cout << "\n\n05. SCHEDULER BASIC TEST\n";
 	Scheduler myScheduler;
 	cout << "Enqueue: \n";
-	for (int i = 0; i < COUNT; i++) {
+	for (int i = 0; i < COUNT; i++) 
+	{
 		cout << input[i] << " ";
 		myScheduler.Enqueue(input[i], input[i]);
 
 	}
 	cout << "\nDequeue: \n";
-	for (int i = 0; i < COUNT; i++) {
+	for (int i = 0; i < COUNT; i++) 
+	{
 		cout << myScheduler.Dequeue();
 		cout << " ";
 	}
 
 	cout << "\n\n06. EMPTY SCHEDULER EXCEPTION TEST\n";
 	myScheduler.Enqueue(1, 1);
-	try {
+	try 
+	{
 		myScheduler.Dequeue();
 		myScheduler.Dequeue();
 	}
-	catch (const char* msg) {
+	catch (const char* msg) 
+	{
 		cout << msg << endl;
 	}
 
 	cout << "\n\n07. SCHEDULER PRIORITY RANGE TEST\n";
 	cout << "Enqueue(1,11): ";
-	try {
+	try 
+	{
 		myScheduler.Enqueue(1, 11);
 		cout << myScheduler.Dequeue();
 	}
-	catch (const char* msg) {
+	catch (const char* msg) 
+	{
 		cout << msg << endl;
 	}
 
 	cout << "\n\n08. SCHEDULER BLOCKING TEST\n";
 	cout << "Enqueue: \n";
-	for (int i = 0; i < COUNT; i++) {
+	for (int i = 0; i < COUNT; i++) 
+	{
 		myScheduler.Enqueue(input[i], input[i]);
 		cout << input[i] << " ";
 	}
 	cout << endl;
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 100; i++)
+	{
 		cout << "\rEnqueue: 10 ";
 		myScheduler.Enqueue(10, 10);
 		cout << "  Dequeue: ";
@@ -302,7 +339,8 @@ int main(void) {
 		cout << " ";
 	}
 	cout << "\nBlocked items: \n";
-	for (int i = 0; i < COUNT; i++) {
+	for (int i = 0; i < COUNT; i++) 
+	{
 		cout << myScheduler.Dequeue() << " ";
 	}
 
@@ -314,8 +352,10 @@ int main(void) {
 	int x = 0;
 
 	Scheduler myScheduler1;
-	for (int i = 0; i < qSize; i++) {
-		for (int i = 0; i < COUNT; i++) {
+	for (int i = 0; i < qSize; i++) 
+	{
+		for (int i = 0; i < COUNT; i++) 
+		{
 			myScheduler1.Enqueue(input[i], input[i]);
 			//cout << input[i] << " ";
 		}
@@ -330,8 +370,10 @@ int main(void) {
 
 	Scheduler myScheduler2;
 	qSize = 2 * qSize;
-	for (int i = 0; i < qSize; i++) {
-		for (int i = 0; i < COUNT; i++) {
+	for (int i = 0; i < qSize; i++) 
+	{
+		for (int i = 0; i < COUNT; i++) 
+		{
 			myScheduler2.Enqueue(input[i], input[i]);
 			//cout << input[i] << " ";
 		}
