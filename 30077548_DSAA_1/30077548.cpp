@@ -160,8 +160,14 @@ void Stack::Push(int value)
 
 Node* Stack::NodePop(void) 
 {
-	cout << "not implemented yet" << endl;
-	return nullptr; //needs changing
+	Node* tmp = top;
+
+	if (top != nullptr)
+	{
+		top = top->getNext();
+	}
+
+	return tmp;
 }
 
 int Stack::Pop(void) 
