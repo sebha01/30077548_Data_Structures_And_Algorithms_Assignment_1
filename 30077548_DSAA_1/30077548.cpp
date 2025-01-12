@@ -172,15 +172,20 @@ Node* Stack::NodePop(void)
 
 int Stack::Pop(void) 
 {
+	Node* tmp = NodePop();
+
 	int ret = 0;
+
 	if (top != nullptr)
 	{
 		ret = top->getVal();
-		Node* tmp = top;
 		top = top->getNext();
 		delete tmp;
 	}
 	else throw "Stack Empty";
+
+	delete tmp;
+
 	return ret;
 }
 
