@@ -1,0 +1,12 @@
+﻿  30077548.cpp
+C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\30077548_DSAA_1\30077548.cpp(429,82): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
+C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\30077548_DSAA_1\30077548.cpp(429,82): warning C4244:         with
+C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\30077548_DSAA_1\30077548.cpp(429,82): warning C4244:         [
+C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\30077548_DSAA_1\30077548.cpp(429,82): warning C4244:             _Rep=__int64
+C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\30077548_DSAA_1\30077548.cpp(429,82): warning C4244:         ]
+C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\30077548_DSAA_1\30077548.cpp(448,82): warning C4244: '=': conversion from '_Rep' to 'int', possible loss of data
+C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\30077548_DSAA_1\30077548.cpp(448,82): warning C4244:         with
+C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\30077548_DSAA_1\30077548.cpp(448,82): warning C4244:         [
+C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\30077548_DSAA_1\30077548.cpp(448,82): warning C4244:             _Rep=__int64
+C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\30077548_DSAA_1\30077548.cpp(448,82): warning C4244:         ]
+  30077548_DSAA_1.vcxproj -> C:\Users\sebas\OneDrive - University of South Wales\Uni\Data structures and algorithms\30077548_Data_Structures_And_Algorithms_Assignment_1\x64\Debug\30077548_DSAA_1.exe

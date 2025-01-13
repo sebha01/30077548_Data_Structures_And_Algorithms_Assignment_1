@@ -79,6 +79,9 @@ private:
 class Scheduler : public Queue
 {
 	//you can only overide PUBLIC methods from the Queue class
+	/*void Enqueue(int i, int priority = 0);
+
+	int Dequeue(void);*/
 private:
 	//you can add private methods and attributes
 	Node* NodeDequeue(void);
