@@ -87,7 +87,6 @@ private:
 	Node* NodeDequeue(void);
 };
 
-
 //-------------------------------YOUR implementation goes here!!!-----------------------
 
 Node::Node(int value, Node* nextptr, Node* prevptr, int currentpriority) 
