@@ -4,7 +4,6 @@
 
 // do not change the declaration section !
 #include <iostream>
-#include <cstdlib>
 
 using namespace std;
 
@@ -63,9 +62,9 @@ public:
 
 	~Queue(void);
 
-	void Enqueue(int i, int priority = 0);
+	virtual void Enqueue(int i, int priority = 0);
 
-	int Dequeue(void);
+	virtual int Dequeue(void);
 
 protected:
 
@@ -80,10 +79,12 @@ private:
 
 class Scheduler : public Queue
 {
+public:
 	//you can only overide PUBLIC methods from the Queue class
-	/*void Enqueue(int i, int priority = 0);
+	void Enqueue(int i, int priority = 0);
 
-	int Dequeue(void);*/
+	int Dequeue(void);
+
 private:
 	//you can add private methods and attributes
 	Node* NodeDequeue(void);
@@ -209,9 +210,9 @@ Queue::~Queue(void)
 	}
 }
 
-void Queue::Enqueue(int i, int priority) 
+void Queue::Enqueue(int i, int priority)
 {
-	Node* tmp = new Node(i, back);
+	Node* tmp = new Node(i, back, nullptr);
 	back = tmp;
 	if (front == nullptr)
 	{
@@ -265,10 +266,82 @@ Node* Queue::NodeDequeue(void)
 // depending on your implementation you may overide any PUBLIC methods INHERITED from the Queue class
 // as well as add ANY private methods in Scheduler class
 
+void Scheduler::Enqueue(int i, int priority)
+{
+	Node* newNode = new Node(i, back, nullptr, priority);
+
+	if (front == nullptr)
+	{
+		front = back = newNode;
+	}
+	else
+	{
+		// Insert node based on its priority
+		Node* current = front;
+		Node* previous = nullptr;
+
+		while (current != nullptr && current->getPriority() >= priority) // Iterate to find insertion point
+		{
+			previous = current;
+			current = current->getNext();
+		}
+
+		if (previous == nullptr) // New highest priority
+		{
+			newNode->setNext(front);
+			front->setPrev(newNode);
+			front = newNode;
+		}
+		else if (current == nullptr) // Lowest priority, add to the end
+		{
+			back->setNext(newNode);
+			newNode->setPrev(back);
+			back = newNode;
+		}
+		else // Insert in the middle
+		{
+			previous->setNext(newNode);
+			newNode->setPrev(previous);
+			newNode->setNext(current);
+			current->setPrev(newNode);
+		}
+	}
+}
+
+int Scheduler::Dequeue(void)
+{
+	Node* tmp = NodeDequeue();
+	int ret = tmp->getVal();
+
+	if (front == nullptr)
+	{
+		back = front;
+	}
+
+	return ret;
+}
+
 Node* Scheduler::NodeDequeue(void) 
 {
-	cout << "depending on your implemenation you may need to modify this method" << endl;
-	return nullptr; //needs changing
+	if (front == nullptr) // Queue is empty
+	{
+		return nullptr;
+	}
+
+	// Dequeue the highest-priority node
+	Node* tmp = front;
+	front = front->getNext();
+
+	if (front != nullptr)
+	{
+		front->setPrev(nullptr);
+	}
+	else // Queue becomes empty
+	{
+		back = nullptr;
+	}
+
+	return tmp;
 }
 
 
@@ -345,21 +418,21 @@ int main(void)
 		cout << msg << endl;
 	}
 
-	//cout << "\n\n05. SCHEDULER BASIC TEST\n";
-	//Scheduler myScheduler;
-	//cout << "Enqueue: \n";
-	//for (int i = 0; i < COUNT; i++) 
-	//{
-	//	cout << input[i] << " ";
-	//	myScheduler.Enqueue(input[i], input[i]);
+	cout << "\n\n05. SCHEDULER BASIC TEST\n";
+	Scheduler myScheduler;
+	cout << "Enqueue: \n";
+	for (int i = 0; i < COUNT; i++) 
+	{
+		cout << input[i] << " ";
+		myScheduler.Enqueue(input[i], input[i]);
 
-	//}
-	//cout << "\nDequeue: \n";
-	//for (int i = 0; i < COUNT; i++) 
-	//{
-	//	cout << myScheduler.Dequeue();
-	//	cout << " ";
-	//}
+	}
+	cout << "\nDequeue: \n";
+	for (int i = 0; i < COUNT; i++) 
+	{
+		cout << myScheduler.Dequeue();
+		cout << " ";
+	}
 
 	//cout << "\n\n06. EMPTY SCHEDULER EXCEPTION TEST\n";
 	//myScheduler.Enqueue(1, 1);
