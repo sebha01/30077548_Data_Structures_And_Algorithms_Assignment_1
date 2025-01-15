@@ -4,6 +4,8 @@
 
 // do not change the declaration section !
 #include <iostream>
+#include <cstdlib>
+
 using namespace std;
 
 class Node
@@ -178,16 +180,17 @@ int Stack::Pop(void)
 
 	int ret = 0;
 
-	if (top != nullptr)
+	if (tmp != nullptr)
 	{
-		ret = top->getVal();
-		top = top->getNext();
-		delete tmp;
+		ret = tmp->getVal();
+		
 	}
-	else throw "Stack Empty";
+	else
+	{
+		throw "Stack Empty";
+	}
 
 	delete tmp;
-
 	return ret;
 }
 
@@ -342,113 +345,113 @@ int main(void)
 		cout << msg << endl;
 	}
 
-	cout << "\n\n05. SCHEDULER BASIC TEST\n";
-	Scheduler myScheduler;
-	cout << "Enqueue: \n";
-	for (int i = 0; i < COUNT; i++) 
-	{
-		cout << input[i] << " ";
-		myScheduler.Enqueue(input[i], input[i]);
+	//cout << "\n\n05. SCHEDULER BASIC TEST\n";
+	//Scheduler myScheduler;
+	//cout << "Enqueue: \n";
+	//for (int i = 0; i < COUNT; i++) 
+	//{
+	//	cout << input[i] << " ";
+	//	myScheduler.Enqueue(input[i], input[i]);
 
-	}
-	cout << "\nDequeue: \n";
-	for (int i = 0; i < COUNT; i++) 
-	{
-		cout << myScheduler.Dequeue();
-		cout << " ";
-	}
+	//}
+	//cout << "\nDequeue: \n";
+	//for (int i = 0; i < COUNT; i++) 
+	//{
+	//	cout << myScheduler.Dequeue();
+	//	cout << " ";
+	//}
 
-	cout << "\n\n06. EMPTY SCHEDULER EXCEPTION TEST\n";
-	myScheduler.Enqueue(1, 1);
-	try 
-	{
-		myScheduler.Dequeue();
-		myScheduler.Dequeue();
-	}
-	catch (const char* msg) 
-	{
-		cout << msg << endl;
-	}
+	//cout << "\n\n06. EMPTY SCHEDULER EXCEPTION TEST\n";
+	//myScheduler.Enqueue(1, 1);
+	//try 
+	//{
+	//	myScheduler.Dequeue();
+	//	myScheduler.Dequeue();
+	//}
+	//catch (const char* msg) 
+	//{
+	//	cout << msg << endl;
+	//}
 
-	cout << "\n\n07. SCHEDULER PRIORITY RANGE TEST\n";
-	cout << "Enqueue(1,11): ";
-	try 
-	{
-		myScheduler.Enqueue(1, 11);
-		cout << myScheduler.Dequeue();
-	}
-	catch (const char* msg) 
-	{
-		cout << msg << endl;
-	}
+	//cout << "\n\n07. SCHEDULER PRIORITY RANGE TEST\n";
+	//cout << "Enqueue(1,11): ";
+	//try 
+	//{
+	//	myScheduler.Enqueue(1, 11);
+	//	cout << myScheduler.Dequeue();
+	//}
+	//catch (const char* msg) 
+	//{
+	//	cout << msg << endl;
+	//}
 
-	cout << "\n\n08. SCHEDULER BLOCKING TEST\n";
-	cout << "Enqueue: \n";
-	for (int i = 0; i < COUNT; i++) 
-	{
-		myScheduler.Enqueue(input[i], input[i]);
-		cout << input[i] << " ";
-	}
-	cout << endl;
-	for (int i = 0; i < 100; i++)
-	{
-		cout << "\rEnqueue: 10 ";
-		myScheduler.Enqueue(10, 10);
-		cout << "  Dequeue: ";
-		cout << myScheduler.Dequeue();
-		cout << " ";
-	}
-	cout << "\nBlocked items: \n";
-	for (int i = 0; i < COUNT; i++) 
-	{
-		cout << myScheduler.Dequeue() << " ";
-	}
-
-
-	cout << "\n\n09. SCHEDULER PERFOMANCE TEST\n";
-	int qSize = 1000000;
-	int duration1 = 0;
-	int duration2 = 0;
-	int x = 0;
-
-	Scheduler myScheduler1;
-	for (int i = 0; i < qSize; i++) 
-	{
-		for (int i = 0; i < COUNT; i++) 
-		{
-			myScheduler1.Enqueue(input[i], input[i]);
-			//cout << input[i] << " ";
-		}
-	}
-
-	high_resolution_clock::time_point t1 = high_resolution_clock::now();
-	myScheduler1.Enqueue(10, 10);
-	x = myScheduler1.Dequeue();
-	high_resolution_clock::time_point t2 = high_resolution_clock::now();
-	duration1 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
-	cout << "\nDequeue = " << x << " Time used : " << duration1 << " microseconds." << endl << endl;
-
-	Scheduler myScheduler2;
-	qSize = 2 * qSize;
-	for (int i = 0; i < qSize; i++) 
-	{
-		for (int i = 0; i < COUNT; i++) 
-		{
-			myScheduler2.Enqueue(input[i], input[i]);
-			//cout << input[i] << " ";
-		}
-	}
+	//cout << "\n\n08. SCHEDULER BLOCKING TEST\n";
+	//cout << "Enqueue: \n";
+	//for (int i = 0; i < COUNT; i++) 
+	//{
+	//	myScheduler.Enqueue(input[i], input[i]);
+	//	cout << input[i] << " ";
+	//}
+	//cout << endl;
+	//for (int i = 0; i < 100; i++)
+	//{
+	//	cout << "\rEnqueue: 10 ";
+	//	myScheduler.Enqueue(10, 10);
+	//	cout << "  Dequeue: ";
+	//	cout << myScheduler.Dequeue();
+	//	cout << " ";
+	//}
+	//cout << "\nBlocked items: \n";
+	//for (int i = 0; i < COUNT; i++) 
+	//{
+	//	cout << myScheduler.Dequeue() << " ";
+	//}
 
 
-	t1 = high_resolution_clock::now();
-	myScheduler2.Enqueue(10, 10);
-	x = myScheduler2.Dequeue();
-	t2 = high_resolution_clock::now();
-	duration2 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
-	cout << "\nDequeue = " << x << " Time used : " << duration2 << " microseconds." << endl << endl;
+	//cout << "\n\n09. SCHEDULER PERFOMANCE TEST\n";
+	//int qSize = 1000000;
+	//int duration1 = 0;
+	//int duration2 = 0;
+	//int x = 0;
 
-	double ratio = (double)duration2 / duration1;
-	std::cout << "ratio: " << ratio;
+	//Scheduler myScheduler1;
+	//for (int i = 0; i < qSize; i++) 
+	//{
+	//	for (int i = 0; i < COUNT; i++) 
+	//	{
+	//		myScheduler1.Enqueue(input[i], input[i]);
+	//		//cout << input[i] << " ";
+	//	}
+	//}
+
+	//high_resolution_clock::time_point t1 = high_resolution_clock::now();
+	//myScheduler1.Enqueue(10, 10);
+	//x = myScheduler1.Dequeue();
+	//high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	//duration1 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+	//cout << "\nDequeue = " << x << " Time used : " << duration1 << " microseconds." << endl << endl;
+
+	//Scheduler myScheduler2;
+	//qSize = 2 * qSize;
+	//for (int i = 0; i < qSize; i++) 
+	//{
+	//	for (int i = 0; i < COUNT; i++) 
+	//	{
+	//		myScheduler2.Enqueue(input[i], input[i]);
+	//		//cout << input[i] << " ";
+	//	}
+	//}
+
+
+	//t1 = high_resolution_clock::now();
+	//myScheduler2.Enqueue(10, 10);
+	//x = myScheduler2.Dequeue();
+	//t2 = high_resolution_clock::now();
+	//duration2 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+	//cout << "\nDequeue = " << x << " Time used : " << duration2 << " microseconds." << endl << endl;
+
+	//double ratio = (double)duration2 / duration1;
+	//std::cout << "ratio: " << ratio;
 
 
 	getchar();
