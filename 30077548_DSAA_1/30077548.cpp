@@ -268,55 +268,55 @@ Node* Queue::NodeDequeue(void)
 
 void Scheduler::Enqueue(int i, int priority)
 {
-	Node* newNode = new Node(i, back, nullptr, priority);
+	Node* newNode = new Node(i, nullptr, nullptr, priority);
 
 	if (front == nullptr)
 	{
 		front = back = newNode;
+		return;
 	}
-	else
+
+	// Insert node based on its priority
+	Node* current = front;
+	Node* previous = nullptr;
+
+	while (current != nullptr && current->getPriority() >= priority) // Linear search
 	{
-		// Insert node based on its priority
-		Node* current = front;
-		Node* previous = nullptr;
+		current = current->getNext();
+	}
 
-		while (current != nullptr && current->getPriority() >= priority) // Iterate to find insertion point
-		{
-			previous = current;
-			current = current->getNext();
-		}
-
-		if (previous == nullptr) // New highest priority
-		{
-			newNode->setNext(front);
-			front->setPrev(newNode);
-			front = newNode;
-		}
-		else if (current == nullptr) // Lowest priority, add to the end
-		{
-			back->setNext(newNode);
-			newNode->setPrev(back);
-			back = newNode;
-		}
-		else // Insert in the middle
-		{
-			previous->setNext(newNode);
-			newNode->setPrev(previous);
-			newNode->setNext(current);
-			current->setPrev(newNode);
-		}
+	if (current == nullptr) // Lowest priority, add to the end
+	{
+		back->setNext(newNode);
+		newNode->setPrev(back);
+		back = newNode;
+	}
+	else if (current == front) // Add to front highest priority
+	{
+		newNode->setNext(front);
+		front->setPrev(newNode);
+		front = newNode;
+	}
+	else // Insert in the middle
+	{
+		previous = current->getPrev();
+		previous->setNext(newNode);
+		newNode->setPrev(previous);
+		newNode->setNext(current);
+		current->setPrev(newNode);
 	}
 }
 
 int Scheduler::Dequeue(void)
 {
+	if (front == nullptr) // Empty queue
+	{
+		throw "Scheduler Empty";
+	}
+
 	Node* tmp = NodeDequeue();
 	int ret = tmp->getVal();
-
-	if (front == nullptr)
-	{
-		back = front;
-	}
+	delete tmp;
 
 	return ret;
 }
@@ -434,75 +434,75 @@ int main(void)
 		cout << " ";
 	}
 
-	//cout << "\n\n06. EMPTY SCHEDULER EXCEPTION TEST\n";
-	//myScheduler.Enqueue(1, 1);
-	//try 
-	//{
-	//	myScheduler.Dequeue();
-	//	myScheduler.Dequeue();
-	//}
-	//catch (const char* msg) 
-	//{
-	//	cout << msg << endl;
-	//}
+	cout << "\n\n06. EMPTY SCHEDULER EXCEPTION TEST\n";
+	myScheduler.Enqueue(1, 1);
+	try 
+	{
+		myScheduler.Dequeue();
+		myScheduler.Dequeue();
+	}
+	catch (const char* msg) 
+	{
+		cout << msg << endl;
+	}
 
-	//cout << "\n\n07. SCHEDULER PRIORITY RANGE TEST\n";
-	//cout << "Enqueue(1,11): ";
-	//try 
-	//{
-	//	myScheduler.Enqueue(1, 11);
-	//	cout << myScheduler.Dequeue();
-	//}
-	//catch (const char* msg) 
-	//{
-	//	cout << msg << endl;
-	//}
+	/*cout << "\n\n07. SCHEDULER PRIORITY RANGE TEST\n";
+	cout << "Enqueue(1,11): ";
+	try 
+	{
+		myScheduler.Enqueue(1, 11);
+		cout << myScheduler.Dequeue();
+	}
+	catch (const char* msg) 
+	{
+		cout << msg << endl;
+	}
 
-	//cout << "\n\n08. SCHEDULER BLOCKING TEST\n";
-	//cout << "Enqueue: \n";
-	//for (int i = 0; i < COUNT; i++) 
-	//{
-	//	myScheduler.Enqueue(input[i], input[i]);
-	//	cout << input[i] << " ";
-	//}
-	//cout << endl;
-	//for (int i = 0; i < 100; i++)
-	//{
-	//	cout << "\rEnqueue: 10 ";
-	//	myScheduler.Enqueue(10, 10);
-	//	cout << "  Dequeue: ";
-	//	cout << myScheduler.Dequeue();
-	//	cout << " ";
-	//}
-	//cout << "\nBlocked items: \n";
-	//for (int i = 0; i < COUNT; i++) 
-	//{
-	//	cout << myScheduler.Dequeue() << " ";
-	//}
+	cout << "\n\n08. SCHEDULER BLOCKING TEST\n";
+	cout << "Enqueue: \n";
+	for (int i = 0; i < COUNT; i++) 
+	{
+		myScheduler.Enqueue(input[i], input[i]);
+		cout << input[i] << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < 100; i++)
+	{
+		cout << "\rEnqueue: 10 ";
+		myScheduler.Enqueue(10, 10);
+		cout << "  Dequeue: ";
+		cout << myScheduler.Dequeue();
+		cout << " ";
+	}
+	cout << "\nBlocked items: \n";
+	for (int i = 0; i < COUNT; i++) 
+	{
+		cout << myScheduler.Dequeue() << " ";
+	}*/
 
 
-	//cout << "\n\n09. SCHEDULER PERFOMANCE TEST\n";
-	//int qSize = 1000000;
-	//int duration1 = 0;
-	//int duration2 = 0;
-	//int x = 0;
+	/*cout << "\n\n09. SCHEDULER PERFOMANCE TEST\n";
+	int qSize = 1000000;
+	int duration1 = 0;
+	int duration2 = 0;
+	int x = 0;
 
-	//Scheduler myScheduler1;
-	//for (int i = 0; i < qSize; i++) 
-	//{
-	//	for (int i = 0; i < COUNT; i++) 
-	//	{
-	//		myScheduler1.Enqueue(input[i], input[i]);
-	//		//cout << input[i] << " ";
-	//	}
-	//}
+	Scheduler myScheduler1;
+	for (int i = 0; i < qSize; i++) 
+	{
+		for (int i = 0; i < COUNT; i++) 
+		{
+			myScheduler1.Enqueue(input[i], input[i]);
+			cout << input[i] << " ";
+		}
+	}
 
-	//high_resolution_clock::time_point t1 = high_resolution_clock::now();
-	//myScheduler1.Enqueue(10, 10);
-	//x = myScheduler1.Dequeue();
-	//high_resolution_clock::time_point t2 = high_resolution_clock::now();
-	//duration1 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
-	//cout << "\nDequeue = " << x << " Time used : " << duration1 << " microseconds." << endl << endl;
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
+	myScheduler1.Enqueue(10, 10);
+	x = myScheduler1.Dequeue();
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	duration1 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+	cout << "\nDequeue = " << x << " Time used : " << duration1 << " microseconds." << endl << endl;*/
 
 	//Scheduler myScheduler2;
 	//qSize = 2 * qSize;
