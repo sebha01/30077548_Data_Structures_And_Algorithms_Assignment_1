@@ -341,7 +341,7 @@ Node* Scheduler::NodeDequeue(void)
 
 	while (current != nullptr)
 	{
-		current->setPriority(current->getPriority() - 1);
+		current->setPriority(current->getPriority() + 1);
 		current = current->getNext();
 	}
 
