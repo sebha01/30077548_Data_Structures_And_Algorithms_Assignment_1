@@ -289,7 +289,7 @@ void Scheduler::Enqueue(int i, int priority)
 	while (current != nullptr && current->getPriority() >= priority) // Linear search
 	{
 		previous = current;
-		current = current->getPrev();
+		current = current->getNext();
 	}
 
 	if (current == nullptr) // Lowest priority, add to the end
@@ -322,7 +322,6 @@ int Scheduler::Dequeue(void)
 
 	Node* tmp = NodeDequeue();
 	int ret = tmp->getVal();
-	delete tmp;
 
 	return ret;
 }
@@ -342,7 +341,7 @@ Node* Scheduler::NodeDequeue(void)
 
 	while (current != nullptr)
 	{
-		current->setPriority(current->getPriority() + 1);
+		current->setPriority(current->getPriority() - 1);
 		current = current->getNext();
 	}
 
