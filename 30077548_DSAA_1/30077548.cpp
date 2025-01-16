@@ -289,7 +289,7 @@ void Scheduler::Enqueue(int i, int priority)
 	while (current != nullptr && current->getPriority() >= priority) // Linear search
 	{
 		previous = current;
-		current = current->getNext();
+		current = current->getPrev();
 	}
 
 	if (current == nullptr) // Lowest priority, add to the end
@@ -338,6 +338,14 @@ Node* Scheduler::NodeDequeue(void)
 	Node* tmp = front;
 	front = front->getNext();
 
+	Node* current = front;
+
+	while (current != nullptr)
+	{
+		current->setPriority(current->getPriority() + 1);
+		current = current->getNext();
+	}
+
 	if (front != nullptr)
 	{
 		front->setPrev(nullptr);
@@ -345,13 +353,6 @@ Node* Scheduler::NodeDequeue(void)
 	else // Queue becomes empty
 	{
 		back = nullptr;
-	}
-
-	Node* current = front;
-	while (current != nullptr)
-	{
-		current->setPriority(current->getPriority() + 1);
-		current = current->getNext();
 	}
 
 	return tmp;
@@ -524,7 +525,7 @@ int main(void)
 		for (int i = 0; i < COUNT; i++) 
 		{
 			myScheduler2.Enqueue(input[i], input[i]);
-			cout << input[i] << " ";
+			//cout << input[i] << " ";
 		}
 	}
 
