@@ -81,8 +81,6 @@ class Scheduler : public Queue
 {
 public:
 	//you can only overide PUBLIC methods from the Queue class
-	void Enqueue(int i, int priority = 0);
-
 	int Dequeue(void);
 
 private:
@@ -266,95 +264,14 @@ Node* Queue::NodeDequeue(void)
 // depending on your implementation you may overide any PUBLIC methods INHERITED from the Queue class
 // as well as add ANY private methods in Scheduler class
 
-void Scheduler::Enqueue(int i, int priority)
-{
-	//Out of range handling
-	if (priority > 10 || priority < 0)
-	{
-		throw "Out of range priority!";
-	}
-
-	Node* newNode = new Node(i, nullptr, nullptr, priority);
-
-	if (front == nullptr)
-	{
-		front = back = newNode;
-		return;
-	}
-
-	// Insert node based on its priority
-	Node* current = front;
-	Node* previous = nullptr;
-
-	while (current != nullptr && current->getPriority() >= priority) // Linear search
-	{
-		previous = current;
-		current = current->getNext();
-	}
-
-	if (current == nullptr) // Lowest priority, add to the end
-	{
-		back->setNext(newNode);
-		newNode->setPrev(back);
-		back = newNode;
-	}
-	else if (current == front) // Add to front highest priority
-	{
-		newNode->setNext(front);
-		front->setPrev(newNode);
-		front = newNode;
-	}
-	else // Insert in the middle
-	{
-		previous->setNext(newNode);
-		newNode->setPrev(previous);
-		newNode->setNext(current);
-		current->setPrev(newNode);
-	}
-}
-
 int Scheduler::Dequeue(void)
 {
-	if (front == nullptr) // Empty queue
-	{
-		throw "Scheduler Empty";
-	}
-
-	Node* tmp = NodeDequeue();
-	int ret = tmp->getVal();
-
-	return ret;
+	
 }
 
 Node* Scheduler::NodeDequeue(void) 
 {
-	if (front == nullptr) // Queue is empty
-	{
-		return nullptr;
-	}
-
-	// Dequeue the highest-priority node
-	Node* tmp = front;
-	front = front->getNext();
-
-	Node* current = front;
-
-	while (current != nullptr)
-	{
-		current->setPriority(current->getPriority() + 1);
-		current = current->getNext();
-	}
-
-	if (front != nullptr)
-	{
-		front->setPrev(nullptr);
-	}
-	else // Queue becomes empty
-	{
-		back = nullptr;
-	}
-
-	return tmp;
+	
 }
 
 
