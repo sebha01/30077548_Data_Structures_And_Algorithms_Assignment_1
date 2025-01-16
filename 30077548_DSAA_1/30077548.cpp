@@ -62,9 +62,9 @@ public:
 
 	~Queue(void);
 
-	virtual void Enqueue(int i, int priority = 0);
+	void Enqueue(int i, int priority = 0);
 
-	virtual int Dequeue(void);
+	int Dequeue(void);
 
 protected:
 
@@ -268,6 +268,12 @@ Node* Queue::NodeDequeue(void)
 
 void Scheduler::Enqueue(int i, int priority)
 {
+	//Out of range handling
+	if (priority > 10 || priority < 0)
+	{
+		throw "Out of range priority!";
+	}
+
 	Node* newNode = new Node(i, nullptr, nullptr, priority);
 
 	if (front == nullptr)
@@ -282,6 +288,7 @@ void Scheduler::Enqueue(int i, int priority)
 
 	while (current != nullptr && current->getPriority() >= priority) // Linear search
 	{
+		previous = current;
 		current = current->getNext();
 	}
 
@@ -299,7 +306,6 @@ void Scheduler::Enqueue(int i, int priority)
 	}
 	else // Insert in the middle
 	{
-		previous = current->getPrev();
 		previous->setNext(newNode);
 		newNode->setPrev(previous);
 		newNode->setNext(current);
@@ -339,6 +345,13 @@ Node* Scheduler::NodeDequeue(void)
 	else // Queue becomes empty
 	{
 		back = nullptr;
+	}
+
+	Node* current = front;
+	while (current != nullptr)
+	{
+		current->setPriority(current->getPriority() + 1);
+		current = current->getNext();
 	}
 
 	return tmp;
@@ -446,7 +459,7 @@ int main(void)
 		cout << msg << endl;
 	}
 
-	/*cout << "\n\n07. SCHEDULER PRIORITY RANGE TEST\n";
+	cout << "\n\n07. SCHEDULER PRIORITY RANGE TEST\n";
 	cout << "Enqueue(1,11): ";
 	try 
 	{
@@ -478,10 +491,10 @@ int main(void)
 	for (int i = 0; i < COUNT; i++) 
 	{
 		cout << myScheduler.Dequeue() << " ";
-	}*/
+	}
 
 
-	/*cout << "\n\n09. SCHEDULER PERFOMANCE TEST\n";
+	cout << "\n\n09. SCHEDULER PERFOMANCE TEST\n";
 	int qSize = 1000000;
 	int duration1 = 0;
 	int duration2 = 0;
@@ -493,7 +506,7 @@ int main(void)
 		for (int i = 0; i < COUNT; i++) 
 		{
 			myScheduler1.Enqueue(input[i], input[i]);
-			cout << input[i] << " ";
+			//cout << input[i] << " ";
 		}
 	}
 
@@ -502,29 +515,29 @@ int main(void)
 	x = myScheduler1.Dequeue();
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 	duration1 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
-	cout << "\nDequeue = " << x << " Time used : " << duration1 << " microseconds." << endl << endl;*/
+	cout << "\nDequeue = " << x << " Time used : " << duration1 << " microseconds." << endl << endl;
 
-	//Scheduler myScheduler2;
-	//qSize = 2 * qSize;
-	//for (int i = 0; i < qSize; i++) 
-	//{
-	//	for (int i = 0; i < COUNT; i++) 
-	//	{
-	//		myScheduler2.Enqueue(input[i], input[i]);
-	//		//cout << input[i] << " ";
-	//	}
-	//}
+	Scheduler myScheduler2;
+	qSize = 2 * qSize;
+	for (int i = 0; i < qSize; i++) 
+	{
+		for (int i = 0; i < COUNT; i++) 
+		{
+			myScheduler2.Enqueue(input[i], input[i]);
+			cout << input[i] << " ";
+		}
+	}
 
 
-	//t1 = high_resolution_clock::now();
-	//myScheduler2.Enqueue(10, 10);
-	//x = myScheduler2.Dequeue();
-	//t2 = high_resolution_clock::now();
-	//duration2 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
-	//cout << "\nDequeue = " << x << " Time used : " << duration2 << " microseconds." << endl << endl;
+	t1 = high_resolution_clock::now();
+	myScheduler2.Enqueue(10, 10);
+	x = myScheduler2.Dequeue();
+	t2 = high_resolution_clock::now();
+	duration2 = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+	cout << "\nDequeue = " << x << " Time used : " << duration2 << " microseconds." << endl << endl;
 
-	//double ratio = (double)duration2 / duration1;
-	//std::cout << "ratio: " << ratio;
+	double ratio = (double)duration2 / duration1;
+	std::cout << "ratio: " << ratio;
 
 
 	getchar();
